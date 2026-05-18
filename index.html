@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betriebssysteme – Lernseite | HS Aalen</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0d1117;
+    --bg2:       #161b22;
+    --bg3:       #21262d;
+    --border:    #30363d;
+    --text:      #e6edf3;
+    --muted:     #8b949e;
+    --accent:    #58a6ff;
+    --green:     #3fb950;
+    --yellow:    #d29922;
+    --red:       #f85149;
+    --purple:    #bc8cff;
+    --orange:    #ffa657;
+    --teal:      #39d353;
+    --heading:   #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ─── SIDEBAR ─────────────────────────────────────────── */
+  #sidebar {
+    width: 260px;
+    min-width: 260px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 0 2rem;
+  }
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .sidebar-header {
+    padding: 1.5rem 1.2rem 1rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg2);
+    z-index: 10;
+  }
+  .sidebar-header .logo {
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .4rem;
+  }
+  .sidebar-header h1 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.2;
+  }
+  .sidebar-header h1 span { color: var(--accent); }
+
+  .nav-group { padding: .8rem 0 .3rem; }
+  .nav-group-title {
+    padding: .3rem 1.2rem;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .38rem 1.2rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: .82rem;
+    font-weight: 600;
+    border-left: 2px solid transparent;
+    transition: all .15s ease;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--accent);
+    background: rgba(88,166,255,.06);
+    border-left-color: var(--accent);
+  }
+  .nav-link .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    flex-shrink: 0;
+    transition: background .15s;
+  }
+  .nav-link:hover .dot, .nav-link.active .dot { background: var(--accent); }
+
+  /* ─── MAIN CONTENT ────────────────────────────────────── */
+  #main {
+    flex: 1;
+    min-width: 0;
+    padding: 3rem 3.5rem;
+    max-width: 980px;
+  }
+
+  /* ─── SECTION HEADERS ─────────────────────────────────── */
+  .chapter {
+    margin-bottom: 4rem;
+    padding-top: 1.5rem;
+  }
+  .chapter-badge {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding: .25rem .7rem;
+    border-radius: 99px;
+    margin-bottom: .8rem;
+  }
+  .badge-blue   { background: rgba(88,166,255,.15); color: var(--accent); border: 1px solid rgba(88,166,255,.3); }
+  .badge-green  { background: rgba(63,185,80,.12); color: var(--green);  border: 1px solid rgba(63,185,80,.3); }
+  .badge-purple { background: rgba(188,140,255,.12); color: var(--purple); border: 1px solid rgba(188,140,255,.3); }
+  .badge-orange { background: rgba(255,166,87,.12); color: var(--orange); border: 1px solid rgba(255,166,87,.3); }
+  .badge-red    { background: rgba(248,81,73,.12); color: var(--red);    border: 1px solid rgba(248,81,73,.3); }
+  .badge-teal   { background: rgba(57,211,83,.1); color: var(--teal);   border: 1px solid rgba(57,211,83,.3); }
+
+  .chapter > h2 {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--heading);
+    margin-bottom: 1.8rem;
+    padding-bottom: .7rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section { margin-bottom: 2rem; }
+  .section > h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+  .section > h3::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 1.1em;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ─── CARDS / GRID ────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+  }
+  .card h4 {
+    font-size: .82rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: .5rem;
+    letter-spacing: .04em;
+  }
+  .card p, .card li {
+    font-size: .82rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .card ul { list-style: none; }
+  .card ul li::before { content: '→ '; color: var(--accent); }
+
+  /* ─── DEFINITION LIST ─────────────────────────────────── */
+  .def-list { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-bottom: 1.2rem; }
+  .def-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    border-bottom: 1px solid var(--border);
+  }
+  .def-row:last-child { border-bottom: none; }
+  .def-key {
+    padding: .65rem 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .78rem;
+    font-weight: 700;
+    color: var(--orange);
+    background: rgba(255,166,87,.04);
+    border-right: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+  }
+  .def-val {
+    padding: .65rem 1rem;
+    font-size: .83rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ─── CODE BLOCKS ─────────────────────────────────────── */
+  .code-wrap {
+    background: #010409;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+  }
+  .code-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .code-lang {
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .code-dots { display: flex; gap: .35rem; }
+  .code-dots span { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #28ca41; }
+  pre {
+    padding: 1.2rem 1.4rem;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: .8rem;
+    line-height: 1.7;
+    color: #e6edf3;
+  }
+  pre::-webkit-scrollbar { height: 4px; }
+  pre::-webkit-scrollbar-track { background: transparent; }
+  pre::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+  .kw  { color: #ff7b72; }
+  .fn  { color: #d2a8ff; }
+  .str { color: #a5d6ff; }
+  .cm  { color: #8b949e; font-style: italic; }
+  .nb  { color: #ffa657; }
+  .num { color: #79c0ff; }
+  .op  { color: #ff7b72; }
+
+  /* ─── TABLE ───────────────────────────────────────────── */
+  .tbl-wrap { overflow-x: auto; margin-bottom: 1.2rem; }
+  table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+  thead th {
+    background: var(--bg3);
+    color: var(--accent);
+    font-weight: 700;
+    padding: .6rem .9rem;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: .55rem .9rem; color: var(--text); line-height: 1.5; }
+  tbody tr:hover td { background: rgba(88,166,255,.04); }
+  td code, pre code { font-family: 'JetBrains Mono', monospace; }
+  td code {
+    background: rgba(88,166,255,.08);
+    padding: .1rem .35rem;
+    border-radius: 4px;
+    font-size: .78rem;
+    color: var(--accent);
+  }
+  .good { color: var(--green); }
+  .bad  { color: var(--red);   }
+
+  /* ─── CALLOUT / ALERT ─────────────────────────────────── */
+  .alert {
+    border-radius: 8px;
+    padding: .9rem 1.1rem;
+    margin-bottom: 1.2rem;
+    font-size: .83rem;
+    line-height: 1.6;
+    border-left: 3px solid;
+  }
+  .alert strong { display: block; margin-bottom: .2rem; font-size: .85rem; }
+  .alert-warn  { background: rgba(210,153,34,.08); border-color: var(--yellow); color: #e3c166; }
+  .alert-info  { background: rgba(88,166,255,.08); border-color: var(--accent); color: #a8c9f5; }
+  .alert-ok    { background: rgba(63,185,80,.08);  border-color: var(--green);  color: #7dd87f; }
+  .alert-danger{ background: rgba(248,81,73,.08);  border-color: var(--red);    color: #f08080; }
+
+  /* ─── STATE DIAGRAM ───────────────────────────────────── */
+  .state-diagram {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .7rem;
+    align-items: center;
+    padding: 1.2rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
+    font-size: .78rem;
+  }
+  .state-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: .45rem .9rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .state-box.active  { border-color: var(--green);  color: var(--green);  background: rgba(63,185,80,.08); }
+  .state-box.wait    { border-color: var(--yellow); color: var(--yellow); background: rgba(210,153,34,.08); }
+  .state-box.blocked { border-color: var(--red);    color: var(--red);    background: rgba(248,81,73,.08); }
+  .state-box.ghost   { border-color: var(--muted);  color: var(--muted);  background: transparent; }
+  .state-arrow { color: var(--muted); font-size: 1rem; }
+
+  /* ─── INLINE HIGHLIGHT ────────────────────────────────── */
+  .hl   { color: var(--accent);  font-weight: 700; }
+  .hlg  { color: var(--green);   font-weight: 700; }
+  .hlr  { color: var(--red);     font-weight: 700; }
+  .hlp  { color: var(--purple);  font-weight: 700; }
+  .hlo  { color: var(--orange);  font-weight: 700; }
+
+  p { font-size: .87rem; line-height: 1.7; color: var(--text); margin-bottom: .8rem; }
+  ul.ul, ol.ol { padding-left: 1.4rem; margin-bottom: .8rem; }
+  ul.ul li, ol.ol li { font-size: .84rem; color: var(--text); line-height: 1.7; }
+
+  /* ─── ACCORDION ───────────────────────────────────────── */
+  details {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: .8rem;
+    overflow: hidden;
+  }
+  summary {
+    padding: .8rem 1.1rem;
+    cursor: pointer;
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--text);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    user-select: none;
+  }
+  summary::before {
+    content: '▶';
+    font-size: .6rem;
+    color: var(--accent);
+    transition: transform .2s;
+  }
+  details[open] summary::before { transform: rotate(90deg); }
+  details > *:not(summary) { padding: 0 1.1rem 1rem; }
+
+  /* ─── DIVIDER ─────────────────────────────────────────── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  /* ─── RESPONSIVE ──────────────────────────────────────── */
+  @media (max-width: 860px) {
+    #sidebar { display: none; }
+    #main { padding: 2rem 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════ SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">HS Aalen · SS 2024</div>
+    <h1>Betriebs<span>systeme</span></h1>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Kapitel 1</div>
+    <a class="nav-link" href="#k1-intro"><span class="dot"></span>Einführung</a>
+    <a class="nav-link" href="#k1-schichten"><span class="dot"></span>Schichtenmodell</a>
+    <a class="nav-link" href="#k1-geschichte"><span class="dot"></span>Geschichte</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Kapitel 2</div>
+    <a class="nav-link" href="#k2-zustaende"><span class="dot"></span>Prozesszustände</a>
+    <a class="nav-link" href="#k2-scheduling"><span class="dot"></span>Scheduling</a>
+    <a class="nav-link" href="#k2-sync"><span class="dot"></span>Synchronisation</a>
+    <a class="nav-link" href="#k2-semaphore"><span class="dot"></span>Semaphore</a>
+    <a class="nav-link" href="#k2-deadlock"><span class="dot"></span>Verklemmungen</a>
+    <a class="nav-link" href="#k2-komm"><span class="dot"></span>Kommunikation</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Linux Praxis</div>
+    <a class="nav-link" href="#lx-befehle"><span class="dot"></span>Befehle</a>
+    <a class="nav-link" href="#lx-rechte"><span class="dot"></span>Rechte &amp; Links</a>
+    <a class="nav-link" href="#lx-io"><span class="dot"></span>I/O &amp; Pipes</a>
+    <a class="nav-link" href="#lx-shell"><span class="dot"></span>Shell-Scripting</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Systemprogrammierung</div>
+    <a class="nav-link" href="#sp-fork"><span class="dot"></span>fork / exec / wait</a>
+    <a class="nav-link" href="#sp-threads"><span class="dot"></span>Threads &amp; Mutex</a>
+    <a class="nav-link" href="#sp-posix-sem"><span class="dot"></span>POSIX Semaphore</a>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-group-title">Prüfung</div>
+    <a class="nav-link" href="#quick"><span class="dot"></span>Schnellreferenz</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════ MAIN -->
+<main id="main">
+
+<!-- ████████████████████████ KAPITEL 1 ██████████████████████████ -->
+<div class="chapter" id="k1-intro">
+  <div class="chapter-badge badge-blue">Kapitel 1</div>
+  <h2>Einführung &amp; Grundlagen</h2>
+
+  <div class="section">
+    <h3>Was ist ein Betriebssystem?</h3>
+    <p>Ein <span class="hl">Betriebssystem (BS)</span> ist die Softwareebene zwischen Anwenderprogrammen und der Hardware. Es verwaltet Ressourcen (CPU, Speicher, E/A) und stellt Schnittstellen bereit.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h4>Aufgaben</h4>
+        <ul>
+          <li>Prozessverwaltung</li>
+          <li>Speicherverwaltung</li>
+          <li>Dateiverwaltung</li>
+          <li>E/A-Verwaltung</li>
+          <li>Netzwerkdienste</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Eigenschaften</h4>
+        <ul>
+          <li>Ressourcenzuteilung</li>
+          <li>Schutz der Prozesse</li>
+          <li>Abstraktion der HW</li>
+          <li>Virtuelle Maschine</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Komponenten (HW)</h4>
+        <ul>
+          <li>CPU (ALU + Register)</li>
+          <li>Hauptspeicher (RAM)</li>
+          <li>Externer Speicher</li>
+          <li>E/A-Geräte</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="k1-schichten">
+    <h3>Das Schichtenmodell</h3>
+    <div class="def-list">
+      <div class="def-row">
+        <div class="def-key">Benutzer</div>
+        <div class="def-val">Mensch interagiert mit Benutzerprogrammen</div>
+      </div>
+      <div class="def-row">
+        <div class="def-key">Benutzerprogramm</div>
+        <div class="def-val">nutzt Betriebssystem über <em>Systemaufrufe</em></div>
+      </div>
+      <div class="def-row">
+        <div class="def-key">Betriebssystem</div>
+        <div class="def-val">nutzt Maschinenhardware über privilegierte Befehle</div>
+      </div>
+      <div class="def-row">
+        <div class="def-key">Hardware</div>
+        <div class="def-val">CPU, Speicher, E/A-Geräte</div>
+      </div>
+    </div>
+    <div class="alert alert-info">
+      <strong>Schalenmodell (Shell-Modell)</strong>
+      Jede Schicht bietet der äußeren Schicht eine <em>virtuelle Maschine</em>. Schnittstellen zwischen Schichten: Systemaufrufe (BS→HW) und API (Programm→BS).
+    </div>
+  </div>
+
+  <div class="section" id="k1-geschichte">
+    <h3>Geschichte der Betriebssysteme</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Generation</th><th>Zeitraum</th><th>Technologie</th><th>Merkmale</th></tr></thead>
+        <tbody>
+          <tr><td>0. Generation</td><td>1940–1950</td><td>Röhren, Steckbretter</td><td class="bad">Kein BS, Maschinensprache, Kabel umstecken</td></tr>
+          <tr><td>1. Generation</td><td>1950–1960</td><td>Transistoren, Lochkarten</td><td>Einfache BS, Batch-Betrieb, Lochkarten-Ein/-Ausgabe</td></tr>
+          <tr><td>2./3. Generation</td><td>1960–1975</td><td>ICs, LSI</td><td>Multiprogramming, Spooling, Timesharing, IBM 360</td></tr>
+          <tr><td>4. Generation</td><td>1975–heute</td><td>VLSI, Mikrochips</td><td class="good">Personal Computer, GUI, UNIX, Windows, Linux</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">Multiprogramming</div><div class="def-val">Mehrere Programme gleichzeitig im Speicher, CPU wechselt zwischen ihnen</div></div>
+      <div class="def-row"><div class="def-key">Spooling</div><div class="def-val">Simultaneous Peripheral Operations On-Line – E/A gepuffert</div></div>
+      <div class="def-row"><div class="def-key">Timesharing</div><div class="def-val">Mehrere Benutzer erhalten abwechselnd CPU-Zeit (Round-Robin-Prinzip)</div></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ████████████████████████ KAPITEL 2 ██████████████████████████ -->
+<div class="chapter" id="k2-zustaende">
+  <div class="chapter-badge badge-green">Kapitel 2</div>
+  <h2>Prozesse</h2>
+
+  <div class="section">
+    <h3>Prozesszustände (Unix)</h3>
+    <div class="state-diagram">
+      <div class="state-box ghost">nicht existent</div>
+      <div class="state-arrow">→ erzeugt →</div>
+      <div class="state-box wait">bereit (wait/idle)</div>
+      <div class="state-arrow">→ Zuteilung →</div>
+      <div class="state-box active">aktiv (running)</div>
+      <div class="state-arrow">→ terminiert →</div>
+      <div class="state-box ghost">zombie</div>
+      <div class="state-arrow">→ wartet auf Eltern →</div>
+      <div class="state-box ghost">nicht existent</div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Zustand</th><th>Bezeichnung (EN)</th><th>Bedeutung</th><th>Übergang durch</th></tr></thead>
+        <tbody>
+          <tr><td class="hlg">bereit</td><td>wait / idle</td><td>Wartet auf CPU-Zuteilung</td><td>erzeugt / verdrängt</td></tr>
+          <tr><td class="hl">aktiv</td><td>running</td><td>Läuft auf der CPU</td><td>Scheduler wählt Prozess</td></tr>
+          <tr><td class="hlr">blockiert</td><td>blocked</td><td>Wartet auf Ereignis (E/A, Signal)</td><td>Systemaufruf (sleep, I/O)</td></tr>
+          <tr><td class="hlo">zombie</td><td>zombie</td><td>Beendet, Vater liest noch Exit-Status</td><td><code>exit()</code> aufgerufen</td></tr>
+          <tr><td class="hlp">angehalten</td><td>stopped</td><td>Durch Signal pausiert</td><td><code>kill -15 / kill -9</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-warn">
+      <strong>⚠ Zombie-Prozess</strong>
+      Endet ein Prozess via <code>exit()</code>, aber der Vater liest <code>waitpid()</code> nicht → bleibt als Zombie in der Prozesstabelle!
+    </div>
+
+    <div class="section">
+      <h3>PCB – Process Control Block</h3>
+      <p>Der Scheduler speichert den Zustand eines Prozesses im <span class="hl">PCB</span> (Prozesskontrollblock / Prozesstafel-Eintrag).</p>
+      <div class="card-grid">
+        <div class="card">
+          <h4>PCB enthält</h4>
+          <ul>
+            <li>PID (Prozess-ID)</li>
+            <li>Zustand (bereit/aktiv/…)</li>
+            <li>Programmzähler (PC)</li>
+            <li>Register-Inhalte</li>
+            <li>Speicherbereich</li>
+            <li>Offene Dateien</li>
+            <li>Priorität</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Scheduler-Aufgaben</h4>
+          <ul>
+            <li>Signale zustellen</li>
+            <li>Prozessdaten abspeichern</li>
+            <li>In Warteschlangen einordnen</li>
+            <li>Dispatching (tatsächliche Zuteilung)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── SCHEDULING ───── -->
+  <div class="section" id="k2-scheduling">
+    <h3>Scheduling-Strategien</h3>
+
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">Scheduling</div><div class="def-val">Planen der Zuteilung von Betriebsmitteln</div></div>
+      <div class="def-row"><div class="def-key">Dispatching</div><div class="def-val">Tatsächliches Zuteilen (Kontextwechsel)</div></div>
+      <div class="def-row"><div class="def-key">Langzeit-S.</div><div class="def-val">Beschränkt Anzahl gleichzeitiger Jobs im System</div></div>
+      <div class="def-row"><div class="def-key">Kurzzeit-S.</div><div class="def-val">Aktueller Prozessoreinsatz (Hauptlast)</div></div>
+    </div>
+
+    <details>
+      <summary>FCFS – First Come First Served (nicht-präemptiv)</summary>
+      <p>Prozesse werden in der Reihenfolge des Eintreffens abgearbeitet. Einfach, aber <span class="hlr">kein Verdrängen</span> möglich → ein langer Job blockiert alle anderen.</p>
+      <div class="alert alert-warn"><strong>Problem:</strong> „Konvoi-Effekt" – kurze Jobs müssen auf einen langen warten.</div>
+    </details>
+
+    <details>
+      <summary>SJF – Shortest Job First (nicht-präemptiv)</summary>
+      <p>Der Prozess mit der <span class="hl">kürzesten geschätzten Ausführungszeit</span> erhält die CPU. Optimal in Bezug auf mittlere Wartezeit.</p>
+      <p>Geschätzte Bedienzeit zum nächsten Zeitpunkt:</p>
+      <code style="display:block;background:var(--bg3);padding:.6rem 1rem;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--purple);margin:.5rem 0">
+        p<sub>t+1</sub> = α·p<sub>t</sub>(1-α)⁰ + α·p<sub>t-1</sub>(1-α)¹ + … + α·p<sub>0</sub>(1-α)ⁿ
+      </code>
+      <div class="alert alert-warn"><strong>Problem:</strong> Verhungern (starvation) möglich – lange Jobs kommen nie dran. Lösung: dynamische Prioritätsanpassung.</div>
+    </details>
+
+    <details>
+      <summary>Round Robin (RR) – präemptiv</summary>
+      <p>Jeder Prozess bekommt ein <span class="hl">Zeitquantum q</span>. Danach wird er verdrängt und ans Ende der Warteschlange gestellt.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>q groß</th><th>q klein</th></tr></thead>
+        <tbody>
+          <tr><td class="good">Wenig Overhead</td><td class="bad">Viele Kontextwechsel</td></tr>
+          <tr><td class="bad">Verhält sich wie FCFS</td><td class="good">Gute Reaktionszeit</td></tr>
+        </tbody>
+      </table></div>
+    </details>
+
+    <details>
+      <summary>Priority Scheduling (PS)</summary>
+      <p>Jeder Prozess hat eine <span class="hl">Priorität</span>. Neue Prozesse werden nach Priorität in die Warteschlange eingeordnet. Bei gleicher Priorität z.B. FCFS.</p>
+      <div class="alert alert-warn"><strong>Achtung:</strong> Verhungern möglich! → Lösung: dynamische Prioritätsanpassung (aging)</div>
+    </details>
+
+    <details>
+      <summary>Multi-Level / Multi-Level Feedback Scheduling</summary>
+      <p>Mehrere Warteschlangen mit verschiedenen Prioritäten:</p>
+      <div class="def-list">
+        <div class="def-row"><div class="def-key">PRIO 0</div><div class="def-val">Systemprozesse</div></div>
+        <div class="def-row"><div class="def-key">PRIO 1</div><div class="def-val">Interaktive Jobs</div></div>
+        <div class="def-row"><div class="def-key">PRIO 2</div><div class="def-val">Allgemeine Jobs</div></div>
+        <div class="def-row"><div class="def-key">PRIO 3</div><div class="def-val">Rechenintensive Jobs</div></div>
+      </div>
+      <p><span class="hlg">Multi-level feedback:</span> Jobs können bei längerer Wartezeit in eine Warteschlange höherer Ordnung wechseln.</p>
+    </details>
+  </div>
+
+  <!-- ───── SYNCHRONISATION ───── -->
+  <div class="section" id="k2-sync">
+    <h3>Synchronisation &amp; Kritischer Abschnitt</h3>
+
+    <div class="alert alert-danger">
+      <strong>🔴 Race Condition</strong>
+      Zwei Prozesse lesen/schreiben gleichzeitig auf gemeinsame Daten → nicht-deterministisches Ergebnis!
+    </div>
+
+    <p>Anforderungen an eine korrekte Lösung für den <span class="hl">kritischen Abschnitt</span>:</p>
+    <div class="card-grid">
+      <div class="card">
+        <h4>1. Mutual Exclusion</h4>
+        <p>Nie zwei Prozesse gleichzeitig im kritischen Abschnitt.</p>
+      </div>
+      <div class="card">
+        <h4>2. Keine Annahmen</h4>
+        <p>Keine Annahmen über Geschwindigkeit oder Anzahl der Prozesse/CPUs.</p>
+      </div>
+      <div class="card">
+        <h4>3. Kein Blockieren außen</h4>
+        <p>Kein Prozess blockiert außerhalb seines kritischen Abschnitts andere.</p>
+      </div>
+      <div class="card">
+        <h4>4. Fairness</h4>
+        <p>Jeder wartende Prozess muss irgendwann eintreten dürfen. Kein ewiges Warten!</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:1.5rem;font-size:.95rem;font-weight:700;color:var(--heading);">Fehlgeschlagene naive Lösungen</h3>
+    <details>
+      <summary>Versuch (1) – gemeinsame Variable <code>nextp</code></summary>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">C – Falsch (1)</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+        <pre><span class="cm">// Prozess 1</span>
+<span class="kw">while</span> (nextp != <span class="num">1</span>) { <span class="cm">/* busy wait */</span> }
+<span class="cm">/* kritischer Abschnitt */</span>
+nextp = <span class="num">2</span>;
+
+<span class="cm">// FEHLER: Prozess 1 kann den kritischen Abschnitt</span>
+<span class="cm">// nicht zweimal hintereinander betreten!</span></pre>
+      </div>
+    </details>
+    <details>
+      <summary>Versuch (3) – beide setzen Flag gleichzeitig</summary>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">C – Falsch (3)</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+        <pre><span class="cm">// Prozess 1</span>
+nextp1 = TRUE;
+<span class="kw">while</span> (nextp2 == TRUE) { <span class="cm">/* warten */</span> }
+<span class="cm">/* kritischer Abschnitt */</span>
+nextp1 = FALSE;
+
+<span class="cm">// FEHLER: Beide setzen gleichzeitig auf TRUE →</span>
+<span class="cm">// beide warten für immer (Deadlock!)</span></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ───── SEMAPHORE ───── -->
+  <div class="section" id="k2-semaphore">
+    <h3>Semaphore (Dijkstra 1965)</h3>
+
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">p(s) – Passieren</div><div class="def-val">Beim Eintritt in den kritischen Abschnitt. Wartet, falls s = 0 (ein anderer Prozess ist drin).</div></div>
+      <div class="def-row"><div class="def-key">v(s) – Verlassen</div><div class="def-val">Beim Verlassen. Weckt einen wartenden Prozess auf (s++). Auch bekannt als signal / up.</div></div>
+    </div>
+
+    <div class="alert alert-ok">
+      <strong>✔ Atomare Operationen</strong>
+      p() und v() sind unteilbar (atomar) – kein Kontextwechsel mittendrin möglich!
+    </div>
+
+    <h3 style="margin-top:1.5rem;font-size:.95rem;font-weight:700;color:var(--heading);">Erzeuger-Verbraucher-Problem</h3>
+    <p>Drei Semaphore: <span class="hl">mutex</span> (wechselseitiger Ausschluss), <span class="hlg">frei</span> (freie Pufferplätze), <span class="hlo">belegt</span> (belegte Plätze).</p>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">C – Erzeuger / Verbraucher</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="cm">/* Initialisierung */</span>
+<span class="nb">sem_t</span> mutex = <span class="num">1</span>, frei = N, belegt = <span class="num">0</span>;
+
+<span class="cm">/* Erzeuger */</span>
+<span class="kw">for</span> (;;) {
+    <span class="fn">produce</span>(&amp;item);
+    <span class="fn">p</span>(frei);          <span class="cm">// warte auf freien Platz</span>
+    <span class="fn">p</span>(mutex);         <span class="cm">// kritischen Abschnitt betreten</span>
+    <span class="fn">putin_buffer</span>(item);
+    <span class="fn">v</span>(mutex);         <span class="cm">// kritischen Abschnitt verlassen</span>
+    <span class="fn">v</span>(belegt);        <span class="cm">// signalisiere belegten Platz</span>
+}
+
+<span class="cm">/* Verbraucher */</span>
+<span class="kw">for</span> (;;) {
+    <span class="fn">p</span>(belegt);        <span class="cm">// warte auf belegten Platz</span>
+    <span class="fn">p</span>(mutex);
+    <span class="fn">getfrom_buffer</span>(&amp;item);
+    <span class="fn">v</span>(mutex);
+    <span class="fn">v</span>(frei);          <span class="cm">// signalisiere freien Platz</span>
+    <span class="fn">consume</span>(item);
+}</pre>
+    </div>
+    <div class="alert alert-danger">
+      <strong>🔴 Deadlock-Gefahr beim Erzeuger-Verbraucher!</strong>
+      Falls irrtümlicherweise frei = belegt = 0: Beide Prozesse schlafen für immer → Verklemmung!
+    </div>
+  </div>
+
+  <!-- ───── DEADLOCK ───── -->
+  <div class="section" id="k2-deadlock">
+    <h3>Verklemmungen (Deadlocks)</h3>
+
+    <div class="alert alert-danger">
+      <strong>Definition Verklemmung</strong>
+      Eine Menge von Prozessen ist verklemmt, wenn jeder Prozess auf ein Ereignis wartet, das nur ein anderer Prozess in der Menge auslösen kann.
+    </div>
+
+    <p>Notwendige Bedingungen (alle 4 müssen gleichzeitig gelten – <span class="hlr">Coffman 1971</span>):</p>
+    <div class="card-grid">
+      <div class="card"><h4>1. Mutual Exclusion</h4><p>Ressource kann nur von einem Prozess gleichzeitig genutzt werden.</p></div>
+      <div class="card"><h4>2. Hold and Wait</h4><p>Prozess hält Ressourcen und wartet auf weitere.</p></div>
+      <div class="card"><h4>3. No Preemption</h4><p>Ressourcen können nicht zwangsweise entzogen werden.</p></div>
+      <div class="card"><h4>4. Circular Wait</h4><p>Zyklische Wartekette: P1 wartet auf P2, P2 auf P3, … Pn auf P1.</p></div>
+    </div>
+
+    <p style="margin-top:.8rem">Strategien gegen Deadlocks:</p>
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">Ignorieren</div><div class="def-val">„Ostrich-Algorithmus" – BS ignoriert das Problem (z.B. frühere Unix-Systeme)</div></div>
+      <div class="def-row"><div class="def-key">Vermeiden</div><div class="def-val">Banker-Algorithmus: nur sichere Zustände zulassen</div></div>
+      <div class="def-row"><div class="def-key">Erkennen</div><div class="def-val">Ressourcen-Graphen zyklisch prüfen → dann Prozess abbrechen</div></div>
+      <div class="def-row"><div class="def-key">Verhindern</div><div class="def-val">Mind. eine Coffman-Bedingung aufheben (z.B. kein Hold-and-Wait)</div></div>
+    </div>
+  </div>
+
+  <!-- ───── KOMMUNIKATION ───── -->
+  <div class="section" id="k2-komm">
+    <h3>Interprozesskommunikation (IPC)</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Mechanismus</th><th>Beschreibung</th><th>Unix-API</th></tr></thead>
+      <tbody>
+        <tr><td>Signale</td><td>Kurze Nachrichten, melden Ereignisse (z.B. Division/0, SIGKILL)</td><td><code>kill(pid, sig)</code></td></tr>
+        <tr><td>Pipes</td><td>Unidirektionaler Bytekanal zwischen Prozessen (Vater↔Kind)</td><td><code>pipe(fd)</code></td></tr>
+        <tr><td>Named Pipes (FIFO)</td><td>Pipe mit Dateiname, auch für nicht-verwandte Prozesse</td><td><code>mkfifo()</code></td></tr>
+        <tr><td>Shared Memory</td><td>Gemeinsamer Speicherbereich – schnellste IPC</td><td><code>shmget / shmat</code></td></tr>
+        <tr><td>Message Queues</td><td>Nachrichtenbasiert, strukturierte Daten</td><td><code>msgget / msgsnd</code></td></tr>
+        <tr><td>Sockets</td><td>Netzwerkkommunikation</td><td><code>socket / bind / connect</code></td></tr>
+      </tbody>
+    </table></div>
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">Nachricht Länge 0</div><div class="def-val">→ Hauptaufgabe: Synchronisation (kein echter Datenaustausch)</div></div>
+      <div class="def-row"><div class="def-key">send(message)</div><div class="def-val">Sende Nachricht an Empfänger</div></div>
+      <div class="def-row"><div class="def-key">receive(message)</div><div class="def-val">Empfange Nachricht, blockiert bis Nachricht vorhanden</div></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ████████████████████████ LINUX PRAXIS ████████████████████████ -->
+<div class="chapter" id="lx-befehle">
+  <div class="chapter-badge badge-orange">Linux Praxis</div>
+  <h2>Linux Shell &amp; Befehle</h2>
+
+  <div class="section">
+    <h3>Wichtige Befehle</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Befehl</th><th>Beschreibung</th><th>Wichtige Optionen</th></tr></thead>
+      <tbody>
+        <tr><td><code>ls</code></td><td>Verzeichnisinhalt anzeigen</td><td><code>-l</code> (lang), <code>-a</code> (alle), <code>-1</code> (1 pro Zeile)</td></tr>
+        <tr><td><code>cd</code></td><td>Verzeichnis wechseln</td><td><code>cd ..</code>, <code>cd ~</code>, <code>cd -</code></td></tr>
+        <tr><td><code>mkdir</code></td><td>Verzeichnis erstellen</td><td><code>-p</code> (inklusive Eltern)</td></tr>
+        <tr><td><code>rm</code></td><td>Datei/Verzeichnis löschen</td><td><code>-r</code> (rekursiv), <code>-f</code> (force)</td></tr>
+        <tr><td><code>cp</code></td><td>Kopieren</td><td><code>-r</code> (rekursiv)</td></tr>
+        <tr><td><code>mv</code></td><td>Verschieben / Umbenennen</td><td>—</td></tr>
+        <tr><td><code>cat</code></td><td>Dateiinhalt ausgeben</td><td>—</td></tr>
+        <tr><td><code>grep</code></td><td>Muster in Dateien suchen</td><td><code>-i</code> (case-insensitive), <code>-r</code> (rekursiv)</td></tr>
+        <tr><td><code>find</code></td><td>Dateien suchen</td><td><code>-name "*.sh"</code>, <code>-type f/d</code></td></tr>
+        <tr><td><code>wc</code></td><td>Zeilen/Wörter/Zeichen zählen</td><td><code>-l</code>, <code>-w</code>, <code>-c</code></td></tr>
+        <tr><td><code>sort</code></td><td>Sortieren</td><td><code>-u</code> (unique), <code>-r</code> (reverse)</td></tr>
+        <tr><td><code>uniq</code></td><td>Duplikate entfernen</td><td>Nach <code>sort</code> verwenden!</td></tr>
+        <tr><td><code>ps</code></td><td>Prozessliste</td><td><code>ps aux</code>, <code>ps -ef</code></td></tr>
+        <tr><td><code>kill</code></td><td>Signal an Prozess senden</td><td><code>kill -9 pid</code> (SIGKILL), <code>kill -15 pid</code> (SIGTERM)</td></tr>
+        <tr><td><code>chmod</code></td><td>Rechte ändern</td><td><code>chmod u+x</code>, <code>chmod 755</code></td></tr>
+        <tr><td><code>ln</code></td><td>Link erstellen</td><td><code>-s</code> (symbolisch)</td></tr>
+        <tr><td><code>umask</code></td><td>Standard-Rechtemaske setzen</td><td><code>umask 022</code></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- ───── RECHTE ───── -->
+  <div class="section" id="lx-rechte">
+    <h3>Dateiberechtigungen (chmod)</h3>
+    <p>Format: <span class="hl">rwxrwxrwx</span> = Eigentümer | Gruppe | Andere</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Zeichen</th><th>Recht</th><th>Oktal (Datei)</th><th>Oktal (Verzeichnis)</th></tr></thead>
+      <tbody>
+        <tr><td><code>r</code></td><td>Lesen</td><td>4</td><td>4 (Inhalt anzeigen)</td></tr>
+        <tr><td><code>w</code></td><td>Schreiben</td><td>2</td><td>2 (Dateien anlegen/löschen)</td></tr>
+        <tr><td><code>x</code></td><td>Ausführen</td><td>1</td><td>1 (CD möglich)</td></tr>
+        <tr><td><code>-</code></td><td>kein Recht</td><td>0</td><td>0</td></tr>
+      </tbody>
+    </table></div>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Beispiele</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre>chmod <span class="num">755</span> datei   <span class="cm"># rwxr-xr-x  (7=rwx, 5=r-x, 5=r-x)</span>
+chmod <span class="num">644</span> datei   <span class="cm"># rw-r--r--  (6=rw-, 4=r--, 4=r--)</span>
+chmod u+x datei  <span class="cm"># Eigentümer: +x hinzufügen</span>
+chmod go-w datei <span class="cm"># Gruppe+Andere: -w entfernen</span>
+chmod +t dir     <span class="cm"># Sticky-Bit setzen</span></pre>
+    </div>
+
+    <h3 style="margin-top:1.2rem;font-size:.95rem;font-weight:700;color:var(--heading);">Links</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Typ</th><th>Erstellen</th><th>Eigenschaft</th></tr></thead>
+      <tbody>
+        <tr><td><span class="hlg">Hardlink</span></td><td><code>ln datei link</code></td><td>Gleicher Inode. Datei bleibt, wenn Original gelöscht. Nur im gleichen Dateisystem.</td></tr>
+        <tr><td><span class="hl">Symlink</span></td><td><code>ln -s datei link</code></td><td>Verweis auf Pfad. Wird ungültig wenn Original gelöscht (dangling link).</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <!-- ───── I/O ───── -->
+  <div class="section" id="lx-io">
+    <h3>Ein-/Ausgabe-Umleitung &amp; Pipes</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Operator</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+      <tbody>
+        <tr><td><code>&gt;</code></td><td>stdout in Datei (überschreiben)</td><td><code>ls &gt; out.txt</code></td></tr>
+        <tr><td><code>&gt;&gt;</code></td><td>stdout in Datei (anhängen)</td><td><code>echo hi &gt;&gt; log.txt</code></td></tr>
+        <tr><td><code>&lt;</code></td><td>stdin aus Datei lesen</td><td><code>sort &lt; liste.txt</code></td></tr>
+        <tr><td><code>2&gt;</code></td><td>stderr umleiten</td><td><code>cmd 2&gt; err.txt</code></td></tr>
+        <tr><td><code>2&gt;&amp;1</code></td><td>stderr zu stdout</td><td><code>cmd &gt; all.txt 2&gt;&amp;1</code></td></tr>
+        <tr><td><code>|</code></td><td>Pipe: stdout → stdin</td><td><code>ls | grep ".sh"</code></td></tr>
+        <tr><td><code>&lt;&lt;EOF</code></td><td>Here-Document</td><td>Mehrfachzeilige stdin-Eingabe</td></tr>
+      </tbody>
+    </table></div>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Pipe-Beispiel</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre>ls /usr/bin | grep <span class="str">"^l"</span> | sort | uniq | wc -l
+<span class="cm"># Listet alle Befehle die mit 'l' beginnen, sortiert, keine Doppelten, zählt Zeilen</span></pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ████████████████████ SHELL SCRIPTING ████████████████████████ -->
+<div class="chapter" id="lx-shell">
+  <div class="chapter-badge badge-purple">Shell-Scripting</div>
+  <h2>Bash Shell-Scripting</h2>
+
+  <div class="section">
+    <h3>Grundstruktur &amp; Variablen</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Bash</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="cm">#!/bin/bash</span>
+<span class="cm"># Kommentar</span>
+
+<span class="cm"># Variablen (kein Leerzeichen um =!)</span>
+name=<span class="str">"Welt"</span>
+zahl=<span class="num">42</span>
+
+<span class="cm"># Ausgabe</span>
+<span class="nb">echo</span> <span class="str">"Hallo $name"</span>
+<span class="nb">echo</span> <span class="str">"Zahl: ${zahl}"</span>
+
+<span class="cm"># Sondervariablen</span>
+<span class="nb">echo</span> <span class="str">"$0"</span>   <span class="cm"># Skriptname</span>
+<span class="nb">echo</span> <span class="str">"$1"</span>   <span class="cm"># 1. Argument</span>
+<span class="nb">echo</span> <span class="str">"$@"</span>   <span class="cm"># alle Argumente</span>
+<span class="nb">echo</span> <span class="str">"$#"</span>   <span class="cm"># Anzahl Argumente</span>
+<span class="nb">echo</span> <span class="str">"$?"</span>   <span class="cm"># Exit-Status letzter Befehl (0 = OK)</span>
+<span class="nb">echo</span> <span class="str">"$$"</span>   <span class="cm"># PID des Skripts</span>
+
+<span class="cm"># Subshell / Befehlssubstitution</span>
+anz=$(<span class="fn">wc</span> -w datei.txt)
+heute=$(<span class="fn">date</span>)</pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>if / test</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Bash</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="kw">if</span> [ <span class="str">"$1"</span> == <span class="str">"hallo"</span> ]; <span class="kw">then</span>
+    <span class="nb">echo</span> <span class="str">"Hallo!"</span>
+<span class="kw">elif</span> [ <span class="num">$zahl</span> -gt <span class="num">10</span> ]; <span class="kw">then</span>
+    <span class="nb">echo</span> <span class="str">"Größer 10"</span>
+<span class="kw">else</span>
+    <span class="nb">echo</span> <span class="str">"Sonst"</span>
+<span class="kw">fi</span>
+
+<span class="cm"># Test-Operatoren</span>
+<span class="cm"># Zahlen:  -eq -ne -lt -le -gt -ge</span>
+<span class="cm"># Strings: == != -z (leer) -n (nicht leer)</span>
+<span class="cm"># Dateien: -f (Datei) -d (Verzeichnis) -e (existiert) -x (ausführbar)</span></pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>for-Schleife</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Bash</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="cm"># Über Liste</span>
+<span class="kw">for</span> f <span class="kw">in</span> *.txt; <span class="kw">do</span>
+    <span class="nb">echo</span> <span class="str">"Datei: $f"</span>
+<span class="kw">done</span>
+
+<span class="cm"># Mit seq</span>
+<span class="kw">for</span> i <span class="kw">in</span> $(<span class="fn">seq</span> <span class="num">1</span> <span class="num">5</span>); <span class="kw">do</span>
+    <span class="nb">echo</span> <span class="str">"$i"</span>
+<span class="kw">done</span>
+
+<span class="cm"># Argumente</span>
+<span class="kw">for</span> arg <span class="kw">in</span> <span class="str">"$@"</span>; <span class="kw">do</span>
+    <span class="nb">echo</span> <span class="str">"Arg: $arg"</span>
+<span class="kw">done</span></pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>while &amp; case</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Bash</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="cm"># while</span>
+i=<span class="num">0</span>
+<span class="kw">while</span> [ $i -lt <span class="num">5</span> ]; <span class="kw">do</span>
+    <span class="nb">echo</span> <span class="str">"$i"</span>
+    i=$(( i + <span class="num">1</span> ))
+<span class="kw">done</span>
+
+<span class="cm"># case</span>
+<span class="kw">case</span> <span class="str">"$1"</span> <span class="kw">in</span>
+    start)   <span class="nb">echo</span> <span class="str">"Starten…"</span> ;;
+    stop)    <span class="nb">echo</span> <span class="str">"Stoppen…"</span> ;;
+    restart) <span class="nb">echo</span> <span class="str">"Neustart…"</span> ;;
+    *)       <span class="nb">echo</span> <span class="str">"Unbekannt"</span> ;;
+<span class="kw">esac</span></pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Funktionen</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Bash</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="fn">meine_funktion</span>() {
+    local x=<span class="str">"$1"</span>    <span class="cm"># lokale Variable</span>
+    <span class="nb">echo</span> <span class="str">"Hallo $x"</span>
+    <span class="kw">return</span> <span class="num">0</span>        <span class="cm"># Rückgabewert (0=OK)</span>
+}
+
+<span class="cm"># Aufruf</span>
+<span class="fn">meine_funktion</span> <span class="str">"Welt"</span>
+
+<span class="cm"># Skript ausführbar machen und aufrufen</span>
+chmod u+x skript.sh
+./skript.sh arg1 arg2</pre>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Here-Document</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">Bash</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="cm"># Eingabe für ein Programm ohne Tastatur-Interaktion</span>
+./satz.sh <span class="op">&lt;&lt;</span>EOF
+Apfel
+Banane
+Kirsche
+EOF</pre>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ████████████████ SYSTEMPROGRAMMIERUNG ████████████████████████ -->
+<div class="chapter" id="sp-fork">
+  <div class="chapter-badge badge-teal">Systemprogrammierung C</div>
+  <h2>fork / exec / wait / exit</h2>
+
+  <div class="section">
+    <h3>Prozesse erstellen: fork()</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">C</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="kw">#include</span> <span class="str">&lt;unistd.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;sys/types.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;stdio.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;sys/wait.h&gt;</span>
+
+<span class="nb">int</span> <span class="fn">main</span>() {
+    <span class="nb">pid_t</span> pid = <span class="fn">fork</span>();  <span class="cm">// Prozess duplizieren</span>
+
+    <span class="kw">if</span> (pid < <span class="num">0</span>) {
+        <span class="fn">perror</span>(<span class="str">"fork fehlgeschlagen"</span>);
+        <span class="kw">return</span> <span class="num">1</span>;
+    }
+    <span class="kw">else if</span> (pid == <span class="num">0</span>) {
+        <span class="cm">/* ═══ KIND-PROZESS (pid == 0) ═══ */</span>
+        <span class="fn">execlp</span>(<span class="str">"ls"</span>, <span class="str">"ls"</span>, <span class="str">"-l"</span>, NULL);  <span class="cm">// Programm ersetzen</span>
+        <span class="fn">exit</span>(<span class="num">1</span>);   <span class="cm">// nur wenn exec scheitert</span>
+    }
+    <span class="kw">else</span> {
+        <span class="cm">/* ═══ VATER-PROZESS (pid = pid des Kindes) ═══ */</span>
+        <span class="fn">waitpid</span>(pid, NULL, <span class="num">0</span>);   <span class="cm">// warte auf Kind</span>
+        <span class="fn">exit</span>(<span class="num">0</span>);
+    }
+}</pre>
+    </div>
+
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">fork() &lt; 0</div><div class="def-val">Fehler – konnte keinen Kindprozess erstellen</div></div>
+      <div class="def-row"><div class="def-key">fork() == 0</div><div class="def-val">Wir sind im Kind-Prozess</div></div>
+      <div class="def-row"><div class="def-key">fork() &gt; 0</div><div class="def-val">Wir sind im Vater, Wert = PID des Kindes</div></div>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Alle Unix-Prozesse stammen von init (PID 1) ab!</strong>
+      fork() erstellt eine exakte Kopie. exec() ersetzt das Programm im Prozess.
+    </div>
+  </div>
+
+  <div class="section" id="sp-threads">
+    <h3>POSIX Threads (pthreads)</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">C – Threads + Mutex</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="kw">#include</span> <span class="str">&lt;pthread.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;stdio.h&gt;</span>
+
+<span class="nb">pthread_mutex_t</span> mtx = PTHREAD_MUTEX_INITIALIZER;
+<span class="nb">int</span> counter = <span class="num">0</span>;
+
+<span class="nb">void</span>* <span class="fn">thread_func</span>(<span class="nb">void</span>* arg) {
+    <span class="fn">pthread_mutex_lock</span>(&amp;mtx);   <span class="cm">// p(mutex)</span>
+    counter++;
+    <span class="fn">pthread_mutex_unlock</span>(&amp;mtx); <span class="cm">// v(mutex)</span>
+    <span class="kw">return</span> NULL;
+}
+
+<span class="nb">int</span> <span class="fn">main</span>() {
+    <span class="nb">pthread_t</span> t1, t2;
+    <span class="fn">pthread_create</span>(&amp;t1, NULL, thread_func, NULL);
+    <span class="fn">pthread_create</span>(&amp;t2, NULL, thread_func, NULL);
+    <span class="fn">pthread_join</span>(t1, NULL);  <span class="cm">// warte auf t1</span>
+    <span class="fn">pthread_join</span>(t2, NULL);
+    <span class="fn">printf</span>(<span class="str">"counter = %d\n"</span>, counter);
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+<span class="cm">// Kompilieren: gcc -o prog prog.c -lpthread</span></pre>
+    </div>
+
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Funktion</th><th>Bedeutung</th></tr></thead>
+      <tbody>
+        <tr><td><code>pthread_create(&amp;tid, attr, fn, arg)</code></td><td>Thread erstellen</td></tr>
+        <tr><td><code>pthread_join(tid, retval)</code></td><td>Auf Thread warten (wie waitpid)</td></tr>
+        <tr><td><code>pthread_exit(val)</code></td><td>Thread beenden</td></tr>
+        <tr><td><code>pthread_mutex_lock(&amp;m)</code></td><td>Mutex sperren (p-Operation)</td></tr>
+        <tr><td><code>pthread_mutex_unlock(&amp;m)</code></td><td>Mutex freigeben (v-Operation)</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="section" id="sp-posix-sem">
+    <h3>POSIX Semaphore</h3>
+    <div class="code-wrap">
+      <div class="code-header"><span class="code-lang">C – POSIX Semaphore</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+      <pre><span class="kw">#include</span> <span class="str">&lt;semaphore.h&gt;</span>
+<span class="kw">#include</span> <span class="str">&lt;pthread.h&gt;</span>
+
+<span class="nb">sem_t</span> sem_frei, sem_belegt, sem_mutex;
+
+<span class="kw">void</span> <span class="fn">init</span>() {
+    <span class="fn">sem_init</span>(&amp;sem_mutex,  <span class="num">0</span>, <span class="num">1</span>);  <span class="cm">// 1 = frei</span>
+    <span class="fn">sem_init</span>(&amp;sem_frei,   <span class="num">0</span>, N);  <span class="cm">// N Pufferplätze</span>
+    <span class="fn">sem_init</span>(&amp;sem_belegt, <span class="num">0</span>, <span class="num">0</span>);  <span class="cm">// 0 belegt</span>
+}
+
+<span class="cm">/* p(s)  →  sem_wait  */</span>
+<span class="fn">sem_wait</span>(&amp;sem_mutex);   <span class="cm">// blockiert wenn sem == 0</span>
+
+<span class="cm">/* v(s)  →  sem_post  */</span>
+<span class="fn">sem_post</span>(&amp;sem_mutex);   <span class="cm">// erhöht sem, weckt Wartenden</span>
+
+<span class="cm">/* Semaphore löschen */</span>
+<span class="fn">sem_destroy</span>(&amp;sem_mutex);
+
+<span class="cm">// Kompilieren: gcc -o prog prog.c -lpthread</span></pre>
+    </div>
+
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">sem_init(s, 0, n)</div><div class="def-val">Initialisiere mit Wert n. 2. Param 0 = prozesslokal</div></div>
+      <div class="def-row"><div class="def-key">sem_wait(s)</div><div class="def-val">p-Operation: s-- (blockiert wenn s==0)</div></div>
+      <div class="def-row"><div class="def-key">sem_post(s)</div><div class="def-val">v-Operation: s++ (weckt wartenden Thread)</div></div>
+      <div class="def-row"><div class="def-key">sem_destroy(s)</div><div class="def-val">Semaphore freigeben</div></div>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ████████████████████████ QUICK REF ████████████████████████████ -->
+<div class="chapter" id="quick">
+  <div class="chapter-badge badge-red">Prüfungsvorbereitung</div>
+  <h2>Schnellreferenz &amp; Klausur-Tipps</h2>
+
+  <div class="section">
+    <h3>Definitionen auswendig lernen</h3>
+    <div class="def-list">
+      <div class="def-row"><div class="def-key">Prozess</div><div class="def-val">Programm in Ausführung + Betriebsmittel (Speicher, offene Dateien, CPU-Zeit)</div></div>
+      <div class="def-row"><div class="def-key">Thread</div><div class="def-val">Leichtgewichtiger Prozess, teilt Adressraum mit anderen Threads im selben Prozess</div></div>
+      <div class="def-row"><div class="def-key">Semaphor</div><div class="def-val">Ganzzahl-Variable mit atomaren Operationen p() und v() zur Synchronisation</div></div>
+      <div class="def-row"><div class="def-key">Deadlock</div><div class="def-val">Zyklische Wartesituation, bei der kein Prozess mehr fortschreiten kann</div></div>
+      <div class="def-row"><div class="def-key">Race Condition</div><div class="def-val">Ergebnis hängt von nicht-deterministischer Ausführungsreihenfolge ab</div></div>
+      <div class="def-row"><div class="def-key">Kritischer Abschnitt</div><div class="def-val">Code-Bereich, der nicht gleichzeitig von mehreren Prozessen ausgeführt werden darf</div></div>
+      <div class="def-row"><div class="def-key">Scheduling</div><div class="def-val">Planen der Betriebsmittelzuteilung (wer bekommt wann die CPU)</div></div>
+      <div class="def-row"><div class="def-key">Dispatching</div><div class="def-val">Tatsächliches Zuteilen der CPU (Kontextwechsel)</div></div>
+      <div class="def-row"><div class="def-key">Zombie</div><div class="def-val">Beendeter Prozess, dessen Exit-Status noch nicht vom Vater gelesen wurde</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h3>Typische Klausuraufgaben</h3>
+    <details>
+      <summary>fork()-Ausgabe vorhersagen</summary>
+      <p>Bei <code>fork()</code> läuft Code nach dem Aufruf in <strong>beiden</strong> Prozessen weiter. Vater bekommt PID des Kindes, Kind bekommt 0.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">C – Was gibt das aus?</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+        <pre><span class="nb">pid_t</span> pid = <span class="fn">fork</span>();
+<span class="kw">if</span> (pid == <span class="num">0</span>)
+    <span class="fn">printf</span>(<span class="str">"Kind\n"</span>);   <span class="cm">// Ausgabe 1</span>
+<span class="kw">else</span>
+    <span class="fn">printf</span>(<span class="str">"Vater\n"</span>);  <span class="cm">// Ausgabe 2</span>
+<span class="cm">// → "Kind" und "Vater" (Reihenfolge nicht deterministisch!)</span></pre>
+      </div>
+    </details>
+
+    <details>
+      <summary>Semaphor-Initialisierung für Erzeuger-Verbraucher</summary>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">C</span><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div></div>
+        <pre><span class="cm">// N = Puffergröße</span>
+<span class="fn">sem_init</span>(&amp;mutex,  <span class="num">0</span>, <span class="num">1</span>);  <span class="cm">// wechselseitiger Ausschluss → 1</span>
+<span class="fn">sem_init</span>(&amp;frei,   <span class="num">0</span>, N);  <span class="cm">// freie Plätze → N</span>
+<span class="fn">sem_init</span>(&amp;belegt, <span class="num">0</span>, <span class="num">0</span>);  <span class="cm">// belegte Plätze → 0</span>
+
+<span class="cm">// ACHTUNG: Reihenfolge der p()-Aufrufe!</span>
+<span class="cm">// IMMER: p(frei/belegt) DANN p(mutex)</span>
+<span class="cm">// NIEMALS: p(mutex) DANN p(frei/belegt) → Deadlock!</span></pre>
+      </div>
+    </details>
+
+    <details>
+      <summary>chmod-Oktalwert berechnen</summary>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Ziel</th><th>rwx-Schreibweise</th><th>Oktal</th></tr></thead>
+        <tbody>
+          <tr><td>Nur Eigentümer alles</td><td><code>rwx------</code></td><td><code>700</code></td></tr>
+          <tr><td>Alle lesen, Eigentümer schreiben</td><td><code>rw-r--r--</code></td><td><code>644</code></td></tr>
+          <tr><td>Alle alles</td><td><code>rwxrwxrwx</code></td><td><code>777</code></td></tr>
+          <tr><td>Standarddatei</td><td><code>rw-rw-r--</code></td><td><code>664</code></td></tr>
+          <tr><td>Standardskript</td><td><code>rwxr-xr-x</code></td><td><code>755</code></td></tr>
+        </tbody>
+      </table></div>
+    </details>
+
+    <details>
+      <summary>Scheduling-Beispiel: Round Robin</summary>
+      <p>Prozesse: A (Burst=6), B (Burst=4), C (Burst=2). Quantum q=2. Ankünfte alle zum Zeitpunkt 0.</p>
+      <div class="def-list">
+        <div class="def-row"><div class="def-key">t=0–2</div><div class="def-val">A läuft (2), Rest: A=4, B=4, C=2</div></div>
+        <div class="def-row"><div class="def-key">t=2–4</div><div class="def-val">B läuft (2), Rest: A=4, B=2, C=2</div></div>
+        <div class="def-row"><div class="def-key">t=4–6</div><div class="def-val">C läuft (2) → fertig bei t=6</div></div>
+        <div class="def-row"><div class="def-key">t=6–8</div><div class="def-val">A läuft (2), Rest: A=2, B=2</div></div>
+        <div class="def-row"><div class="def-key">t=8–10</div><div class="def-val">B läuft (2) → fertig bei t=10</div></div>
+        <div class="def-row"><div class="def-key">t=10–12</div><div class="def-val">A läuft (2) → fertig bei t=12</div></div>
+      </div>
+    </details>
+
+    <details>
+      <summary>Coffman-Bedingungen prüfen (Deadlock)</summary>
+      <p>Für eine Klausuraufgabe: Prüfe systematisch alle 4 Coffman-Bedingungen:</p>
+      <ul class="ul">
+        <li>✅ Mutual Exclusion: Kann Ressource exklusiv gehalten werden?</li>
+        <li>✅ Hold &amp; Wait: Hält Prozess eine Ressource und wartet auf weitere?</li>
+        <li>✅ No Preemption: Kann Ressource nicht zwangsweise entzogen werden?</li>
+        <li>✅ Circular Wait: Gibt es einen Kreis in der Warte-Graph?</li>
+      </ul>
+      <p>Sind alle 4 erfüllt → Deadlock möglich. Zerstöre mind. 1 Bedingung zur Vermeidung.</p>
+    </details>
+  </div>
+
+  <div class="section">
+    <h3>Häufige Fehler auf Papier</h3>
+    <div class="alert alert-danger">
+      <strong>🔴 Leerzeichen in Bash-Variablenzuweisung</strong>
+      <code>x = 5</code> ist FALSCH. Richtig: <code>x=5</code>
+    </div>
+    <div class="alert alert-danger">
+      <strong>🔴 fork() Rückgabewert vergessen zu prüfen</strong>
+      Immer alle 3 Fälle behandeln: &lt; 0, == 0, &gt; 0
+    </div>
+    <div class="alert alert-danger">
+      <strong>🔴 Semaphor-Reihenfolge vertauschen</strong>
+      Im Erzeuger-Verbraucher: <code>p(frei)</code> MUSS vor <code>p(mutex)</code> kommen!
+    </div>
+    <div class="alert alert-warn">
+      <strong>⚠ exec() nach fork() ohne exit()</strong>
+      Nach <code>exec()</code> im Kind immer <code>exit(1)</code> wenn exec scheitert!
+    </div>
+    <div class="alert alert-warn">
+      <strong>⚠ Zombie-Prozesse</strong>
+      Vater MUSS <code>waitpid()</code> aufrufen, sonst bleibt Kind als Zombie!
+    </div>
+    <div class="alert alert-info">
+      <strong>ℹ Shell-Skript ausführbar machen</strong>
+      <code>chmod u+x skript.sh</code> nicht vergessen! Oder <code>bash skript.sh</code> aufrufen.
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+  // Aktiven Nav-Link beim Scrollen hervorheben
+  const sections = document.querySelectorAll('.chapter, .section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  document.querySelectorAll('[id]').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
